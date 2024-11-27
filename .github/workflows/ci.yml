@@ -26,14 +26,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest pytest-cov
 
-      # Ejecutar pruebas con cobertura
-      - name: Run tests with coverage
-        run: |
-          pytest --cov=. --cov-report=xml
+      # Ejecutar pruebas con cobertura y generar reporte HTML
+      - name: Run tests with coverage and generate HTML report
+        run: pytest tests/ --cov=. --cov-report=html --cov-report=xml
 
-      # Subir resultados de cobertura a GitHub
-      - name: Upload coverage to GitHub
+      # Subir el reporte HTML como artefacto
+      - name: Upload HTML coverage report
         uses: actions/upload-artifact@v3
         with:
-          name: coverage-report
-          path: coverage.xml
+          name: html-coverage-report
+          path: htmlcov
